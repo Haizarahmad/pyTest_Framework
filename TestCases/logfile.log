@@ -1,0 +1,9 @@
+2024-09-05 10:29:53,778 : INFO : test_loginsubmission : Username Entered
+2024-09-05 10:29:55,876 : INFO : test_loginsubmission : Password Entered
+2024-09-05 10:29:57,956 : INFO : test_loginsubmission : logged in
+2024-09-05 10:30:04,215 : INFO : test_loginsubmission : Username Entered
+2024-09-05 10:30:04,215 : INFO : test_loginsubmission : Username Entered
+2024-09-05 10:30:06,315 : INFO : test_loginsubmission : Password Entered
+2024-09-05 10:30:06,315 : INFO : test_loginsubmission : Password Entered
+2024-09-05 10:30:08,400 : INFO : test_loginsubmission : logged in
+2024-09-05 10:30:08,400 : INFO : test_loginsubmission : logged in
