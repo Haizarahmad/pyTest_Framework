@@ -1,6 +1,8 @@
 import pytest
 from selenium import webdriver
 
+from pageObjects.LoginPage import LoginPage
+
 
 def pytest_addoption(parser):
     parser.addoption(
@@ -17,8 +19,6 @@ def setup(request):
     elif browser_name == "firefox":
         driver = webdriver.Firefox()
 
-    driver.get("http://localhost/MDUMS/Masjid%20Darul%20Ulum%20-%20Ver2/New-Login-Page.php")
-    driver.maximize_window()
     request.cls.driver = driver
     yield
     driver.close()
