@@ -160,3 +160,5 @@
 2024-09-06 18:23:00,518 : INFO : test_loginsubmission : Password Entered
 2024-09-06 18:23:00,569 : INFO : test_loginsubmission : logged in
 2024-09-06 18:23:00,569 : INFO : test_loginsubmission : logged in
+2024-09-07 19:03:02,278 : CRITICAL : test_valid_login_submission : Failed
+2024-09-07 19:07:16,755 : CRITICAL : test_valid_login_submission : Failed

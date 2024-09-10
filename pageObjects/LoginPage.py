@@ -1,7 +1,6 @@
 from selenium.webdriver.common.by import By
 
-
-class LoginPage:
+class LoginPage():
 
     txtUsername = (By.ID, "username")
     txtPassword = (By.ID, "password")

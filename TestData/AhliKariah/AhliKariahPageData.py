@@ -1,19 +1,10 @@
-# import openpyxl
 import openpyxl
 
 
-class LoginPageData:
-
-    test_LoginPage_invalid_data = [
-        {"username": "amin", "password": "13", "ExpectedResult": "No user have been register into the system"}
-    ]
-    #
-    # test_admin_data = [
-    #     {"username": "admin", "password": "123"}
-    # ]
+class AhliKariahPageData:
 
     @staticmethod
-    def getValidData(PATH):
+    def getData(PATH):
         Dict = []
         book = openpyxl.load_workbook(PATH)
         sheet = book.active

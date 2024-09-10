@@ -1,7 +1,8 @@
+import time
 import pytest
 from selenium import webdriver
-
-from pageObjects.LoginPage import LoginPage
+from pageObjects.Admin.AdminDashboardPage import AdminDashboardPage
+from utilities.BaseClass import BaseClass
 
 
 def pytest_addoption(parser):
@@ -22,3 +23,11 @@ def setup(request):
     request.cls.driver = driver
     yield
     driver.close()
+
+@pytest.fixture(scope="class")
+def loginAsAdmin(setup, request):
+    # Common setup logic for all test cases
+    loginPage = BaseClass()
+    loginPage.loginAsAdmin(request.cls.driver)
+    time.sleep(2)
+    yield
