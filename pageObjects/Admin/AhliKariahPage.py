@@ -1,8 +1,7 @@
 import time
-
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+
+from pageObjects.Admin.UpdateAhliKariahPage import UpdateAhliKariahPage
 
 
 class AhliKariahPage:
@@ -30,11 +29,16 @@ class AhliKariahPage:
         return self.driver.find_element(*AhliKariahPage.txtSearch)
 
     def viewAhliKariahByName(self, name):
-        elements = self.driver.find_elements(*AhliKariahPage.table)
-        for element in elements:
-            target_element = element.find_element(By.XPATH, f"tr[contains(.,'{name}')]")
-            if target_element is not None:
-                return target_element.find_element(*AhliKariahPage.btnViewAhliKariah).click()
+        try:
+            elements = self.driver.find_elements(*AhliKariahPage.table)
+            for element in elements:
+                target_element = element.find_element(By.XPATH, f"tr[contains(.,'{name}')]")
+                if target_element is not None:
+                    target_element.find_element(*AhliKariahPage.btnViewAhliKariah).click()
+                    updateAhliKariahPage = UpdateAhliKariahPage(self.driver)
+                    return updateAhliKariahPage
+        except Exception:
+            raise Exception("Unable to view data by Name")
 
     def delAhliKariahByName(self, name):
         elements = self.driver.find_elements(*AhliKariahPage.table)

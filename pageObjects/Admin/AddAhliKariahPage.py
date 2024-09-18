@@ -1,8 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
-
-
-class AddAhliKariahPage:
+from pageObjects.BasePage import BasePage
+class AddAhliKariahPage(BasePage):
 
     txtName = (By.NAME, "name")
     txtAge = (By.NAME, "age")
@@ -17,40 +16,47 @@ class AddAhliKariahPage:
     toastMsg = (By.XPATH, "//div[@class='toast-body']/p")
 
     def __init__(self, driver):
-        self.driver = driver
+        super().__init__(driver)
 
     def getTxtName(self):
-        return self.driver.find_element(*AddAhliKariahPage.txtName)
+        return self.find(*AddAhliKariahPage.txtName)
 
     def getTxtAge(self):
-        return self.driver.find_element(*AddAhliKariahPage.txtAge)
+        return self.find(*AddAhliKariahPage.txtAge)
 
     def getTxtRelationship(self):
-        return Select(self.driver.find_element(*AddAhliKariahPage.txtRelationship))
+        return Select(self.find(*AddAhliKariahPage.txtRelationship))
 
     def getTxtNationality(self):
-        return Select(self.driver.find_element(*AddAhliKariahPage.txtNationality))
+        return Select(self.find(*AddAhliKariahPage.txtNationality))
 
     def getTxtEmail(self):
-        return self.driver.find_element(*AddAhliKariahPage.txtEmail)
+        return self.find(*AddAhliKariahPage.txtEmail)
 
     def getTxtPhone(self):
-        return self.driver.find_element(*AddAhliKariahPage.txtPhone)
+        return self.find(*AddAhliKariahPage.txtPhone)
 
     def getTxtAddress(self):
-        return self.driver.find_element(*AddAhliKariahPage.txtAddress)
+        return self.find(*AddAhliKariahPage.txtAddress)
 
     def getBtnAddAhliKariah(self):
-        return self.driver.find_element(*AddAhliKariahPage.btnAddAhliKariah)
+        return self.find(*AddAhliKariahPage.btnAddAhliKariah)
 
     def getBtnBack(self):
-        return self.driver.find_element(*AddAhliKariahPage.btnBack)
+        return self.find(*AddAhliKariahPage.btnBack).click()
 
     def getBtnUpdate(self):
-        return self.driver.find_element(*AddAhliKariahPage.btnUpdate)
+        return self.find(*AddAhliKariahPage.btnUpdate)
 
     def getToastMsg(self):
-        return self.driver.find_element(*AddAhliKariahPage.toastMsg)
+        return self.find(*AddAhliKariahPage.toastMsg)
+
+    def clearAhliKariahForm(self):
+        self.getTxtName().clear()
+        self.getTxtAge().clear()
+        self.getTxtEmail().clear()
+        self.getTxtPhone().clear()
+        self.getTxtAddress().clear()
 
     def fillAhliKariahForm(self, data):
         self.getTxtName().send_keys(data["Nama"])

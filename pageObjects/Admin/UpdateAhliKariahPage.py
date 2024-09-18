@@ -1,34 +1,37 @@
 from selenium.webdriver.common.by import By
 
 from pageObjects.Admin.AddAhliKariahPage import AddAhliKariahPage
+from pageObjects.BasePage import BasePage
 
 
-class UpdateAhliKariahPage:
+
+class UpdateAhliKariahPage(BasePage):
 
     btnUpdate = (By.XPATH, "//button[contains(text(),'Kemaskini')]")
     toastMsg = (By.XPATH, "//div[@class='toast-body']/p")
+    btnBack = (By.XPATH, "//a[contains(text(),'Kembali')]")
     def __init__(self, driver):
-        self.driver = driver
+        super().__init__(driver)
 
     def getBtnUpdate(self):
         return self.driver.find_element(*UpdateAhliKariahPage.btnUpdate)
+
+    def getBtnBack(self):
+        return self.find(*UpdateAhliKariahPage.btnBack).click()
 
     def getToastMsg(self):
         return self.driver.find_element(*UpdateAhliKariahPage.toastMsg)
 
     def UpdateAhliKariahForm(self, data):
+        # 14 LOC
         fieldElement = AddAhliKariahPage(self.driver)
-        fieldElement.getTxtName().clear()
+        fieldElement.clearAhliKariahForm()
         fieldElement.getTxtName().send_keys(data["updNama"])
-        fieldElement.getTxtAge().clear()
         fieldElement.getTxtAge().send_keys(data["updUmur"])
         fieldElement.getTxtRelationship().select_by_value(data["updHubungan"])
         fieldElement.getTxtNationality().select_by_value(data["updBangsa"])
-        fieldElement.getTxtEmail().clear()
         fieldElement.getTxtEmail().send_keys(data["updEmel"])
-        fieldElement.getTxtPhone().clear()
         fieldElement.getTxtPhone().send_keys(data["updTelefon"])
-        fieldElement.getTxtAddress().clear()
         fieldElement.getTxtAddress().send_keys(data["updAlamat"])
         self.driver.find_element(*UpdateAhliKariahPage.btnUpdate).click()
 

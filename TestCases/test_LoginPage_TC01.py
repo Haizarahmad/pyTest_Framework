@@ -6,8 +6,8 @@ from utilities.BaseClass import BaseClass
 
 
 class TestLoginPage(BaseClass):
-    @pytest.mark.regression
-    def test_valid_login_submission(self, getValidData):
+    @pytest.mark.smoke
+    def test_TC01(self, getValidData):
         try:
             self.driver.implicitly_wait(3)
             self.driver.get("http://localhost/MDUMS/Masjid%20Darul%20Ulum%20-%20Ver2/New-Login-Page.php")
@@ -28,7 +28,7 @@ class TestLoginPage(BaseClass):
             log.critical("Failed")
             raise
 
-    @pytest.mark.regression
+    @pytest.mark.functional
     def test_invalid_login_submission(self, getInvalidData):
         try:
             self.driver.implicitly_wait(3)

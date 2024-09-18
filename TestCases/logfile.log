@@ -162,3 +162,16 @@
 2024-09-06 18:23:00,569 : INFO : test_loginsubmission : logged in
 2024-09-07 19:03:02,278 : CRITICAL : test_valid_login_submission : Failed
 2024-09-07 19:07:16,755 : CRITICAL : test_valid_login_submission : Failed
+2024-09-17 21:58:48,465 : CRITICAL : test_TC01 : Failed
+2024-09-17 21:58:48,583 : CRITICAL : test_invalid_login_submission : Failed
+2024-09-17 21:59:26,531 : CRITICAL : test_TC01 : Failed
+2024-09-17 22:04:31,170 : CRITICAL : test_TC01 : Failed
+2024-09-17 22:07:41,792 : CRITICAL : test_TC01 : Failed
+2024-09-17 22:09:38,455 : CRITICAL : test_TC01 : Failed
+2024-09-17 22:12:27,591 : CRITICAL : test_TC01 : Failed
+2024-09-18 17:14:32,166 : CRITICAL : test_TC01 : Failed
+2024-09-18 17:16:15,738 : CRITICAL : test_TC01 : Failed
+2024-09-18 17:22:47,770 : CRITICAL : test_TC01 : Failed
+2024-09-18 17:23:27,482 : CRITICAL : test_TC01 : Failed
+2024-09-18 17:26:37,397 : CRITICAL : test_TC01 : Failed
+2024-09-18 17:46:32,722 : CRITICAL : test_TC01 : Failed

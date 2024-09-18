@@ -2,24 +2,25 @@ import pytest
 
 from TestData.AhliKariah.AhliKariahPageData import AhliKariahPageData
 from pageObjects.Admin.AddAhliKariahPage import AddAhliKariahPage
-from pageObjects.Admin.AdminDashboardPage import AdminDashboardPage
-from pageObjects.Admin.AhliKariahPage import AhliKariahPage
+from pageObjects.Admin.SideBar import SideBar
 from utilities.BaseClass import BaseClass
 import time
 
 @pytest.mark.usefixtures("loginAsAdmin")
 class TestAhliKariah(BaseClass):
 
-    @pytest.mark.regression
-    def test_addAhliKariah(self, getValidData):
+    @pytest.mark.smoke
+    def test_TC02(self, getValidData):
 
-        global addAhliKariahPage, ahliKariahPage
+        global ahliKariahPage, sideBar
         try:
+            # To navigate Ahli Kariah module #
+            sideBar = SideBar(self.driver)
+            ahliKariahPage = sideBar.getAhliKariah()
+            # to go adding data
+            self.clickByElement(ahliKariahPage.getBtnAddAhliKariah())
 
-            adminDashboard = AdminDashboardPage(self.driver)
-            adminDashboard.getAhliKariah().click()
-            ahliKariahPage = AhliKariahPage(self.driver)
-            ahliKariahPage.getBtnAddAhliKariah().click()
+            # To add test data #
             addAhliKariahPage = AddAhliKariahPage(self.driver)
             addAhliKariahPage.fillAhliKariahForm(getValidData)
             time.sleep(1)
@@ -28,12 +29,10 @@ class TestAhliKariah(BaseClass):
             assert toast == getValidData["ToastMsg"]
             time.sleep(2)
         except Exception:
-            raise Exception
+            raise
         finally:
-            addAhliKariahPage.getBtnBack().click()
             time.sleep(2)
-            ahliKariahPage.getTxtSearchAhliKariah().send_keys(getValidData["Nama"])
-            ahliKariahPage.delAhliKariahByName(getValidData["Nama"])
+            self.dataCleanup(getValidData["Nama"], self.driver)
 
     @pytest.fixture(params=AhliKariahPageData.getData("C:\\Users\\User\\PycharmProjects\\Pytest_Framework\\TestData\\AhliKariah\\testdata_TC02.xlsx")) #data passed always in params = []  # one tuple represent one test case
     def getValidData(self, request):

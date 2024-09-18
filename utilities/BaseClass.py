@@ -4,6 +4,7 @@ import time
 import pytest
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from pageObjects.Admin.SideBar import SideBar
 from pageObjects.LoginPage import LoginPage
 
 
@@ -11,9 +12,20 @@ from pageObjects.LoginPage import LoginPage
 class BaseClass:
 
     def verifyPresence(self, locator):
-        element = WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, 5).until(
             EC.presence_of_element_located(locator)
         )
+
+    def clickByElement(self, locator):
+        try:
+            return locator.click()
+        except Exception:
+            raise Exception("Unable to locate/click the element")
+    def enterTextByElement(self, locator, text):
+        try:
+            return locator.send_keys(text)
+        except Exception:
+            raise Exception("Unable to locate or send input to the element")
 
     def getLogger(self):
         loggerName = inspect.stack()[1][3]
@@ -28,15 +40,24 @@ class BaseClass:
         return logger
 
     def loginAsAdmin(self, driver):
-        self.driver = driver
-        loginpage = LoginPage(self.driver)
-        self.driver.get("http://localhost/MDUMS/Masjid%20Darul%20Ulum%20-%20Ver2/New-Login-Page.php")
-        self.driver.maximize_window()
-        loginpage.getUsername().send_keys("admin")  # Replace with actual admin username
-        loginpage.getPassword().send_keys("123")  # Replace with actual admin password
-        loginpage.performLogin()  # Perform login action
-        time.sleep(2)
-        loginpage.acceptAlert()
+        try:
+            self.driver = driver
+            loginpage = LoginPage(self.driver)
+            self.driver.get("http://localhost/MDUMS/Masjid%20Darul%20Ulum%20-%20Ver2/New-Login-Page.php")
+            self.enterTextByElement(loginpage.getUsername(), "admin")  # Replace with actual admin username
+            self.enterTextByElement(loginpage.getPassword(), "123")
+            loginpage.performLogin()  # Perform login action
+            time.sleep(2)
+            loginpage.acceptAlert()
+            time.sleep(2)
+        except Exception:
+            raise Exception("Unable login")
+
+    def dataCleanup(self, data, driver):
+        sideBar = SideBar(driver)
+        ahliKariahPage = sideBar.getAhliKariah()
+        self.enterTextByElement(ahliKariahPage.getTxtSearchAhliKariah(), data)
+        ahliKariahPage.delAhliKariahByName(data)
         time.sleep(2)
 
 
