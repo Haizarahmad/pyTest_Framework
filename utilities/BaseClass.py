@@ -11,6 +11,7 @@ from pageObjects.LoginPage import LoginPage
 @pytest.mark.usefixtures("setup")
 class BaseClass:
 
+    loginPageURL = "http://localhost/MDUMS/Masjid%20Darul%20Ulum%20-%20Ver2/New-Login-Page.php"
     def verifyPresence(self, locator):
         WebDriverWait(self.driver, 5).until(
             EC.presence_of_element_located(locator)

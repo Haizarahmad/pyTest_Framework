@@ -32,6 +32,7 @@ class TestAhliKariah(BaseClass):
 
             # To delete Test Data #
             ahliKariahPage.delAhliKariahByName(getValidData["DelByName"])
+
         except Exception:
             raise
     @pytest.fixture(params=AhliKariahPageData.getData("C:\\Users\\User\\PycharmProjects\\Pytest_Framework\\TestData\\AhliKariah\\testdata_TC04.xlsx")) #data passed always in params = []  # one tuple represent one test case

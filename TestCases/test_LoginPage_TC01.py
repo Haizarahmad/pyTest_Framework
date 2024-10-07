@@ -10,7 +10,7 @@ class TestLoginPage(BaseClass):
     def test_TC01(self, getValidData):
         try:
             self.driver.implicitly_wait(3)
-            self.driver.get("http://localhost/MDUMS/Masjid%20Darul%20Ulum%20-%20Ver2/New-Login-Page.php")
+            self.driver.get(self.loginPageURL)
             self.driver.maximize_window()
             loginpage = LoginPage(self.driver)
             loginpage.getUsername().clear()
@@ -32,7 +32,7 @@ class TestLoginPage(BaseClass):
     def test_invalid_login_submission(self, getInvalidData):
         try:
             self.driver.implicitly_wait(3)
-            self.driver.get("http://localhost/MDUMS/Masjid%20Darul%20Ulum%20-%20Ver2/New-Login-Page.php")
+            self.driver.get(self.loginPageURL)
             self.driver.maximize_window()
             loginpage = LoginPage(self.driver)
             loginpage.getUsername().clear()
@@ -55,6 +55,7 @@ class TestLoginPage(BaseClass):
         return request.param
 
     @pytest.fixture(params=LoginPageData.test_LoginPage_invalid_data) #one tuple represent one test case
+    # [{"username": "amin", "password": "13", "ExpectedResult": "n/a"}]
     def getInvalidData(self, request):
         return request.param
 

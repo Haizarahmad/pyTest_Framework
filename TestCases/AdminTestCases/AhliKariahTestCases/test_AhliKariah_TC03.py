@@ -34,12 +34,14 @@ class TestAhliKariah(BaseClass):
 
             # verify data #
             addAhlikariahPage.verifyAhliKariahForm(getValidData)
-            time.sleep(2)
-        except Exception:
-            raise
-        finally:
+
+            # data cleanup #
             time.sleep(2)
             self.dataCleanup(getValidData["Nama"], self.driver)
+
+        except Exception:
+            raise
+
 
     @pytest.fixture(params=AhliKariahPageData.getData("C:\\Users\\User\\PycharmProjects\\Pytest_Framework\\TestData\\AhliKariah\\testdata_TC03.xlsx")) #data passed always in params = []  # one tuple represent one test case
     def getValidData(self, request):

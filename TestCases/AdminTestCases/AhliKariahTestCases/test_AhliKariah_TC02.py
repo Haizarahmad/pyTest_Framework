@@ -12,11 +12,11 @@ class TestAhliKariah(BaseClass):
     @pytest.mark.smoke
     def test_TC02(self, getValidData):
 
-        global ahliKariahPage, sideBar
         try:
             # To navigate Ahli Kariah module #
             sideBar = SideBar(self.driver)
             ahliKariahPage = sideBar.getAhliKariah()
+
             # to go adding data
             self.clickByElement(ahliKariahPage.getBtnAddAhliKariah())
 
@@ -26,14 +26,17 @@ class TestAhliKariah(BaseClass):
             time.sleep(1)
             toast = addAhliKariahPage.getToastMsg().text
             time.sleep(2)
-            assert toast == getValidData["ToastMsg"]
-            time.sleep(2)
-        except Exception:
-            raise
-        finally:
-            time.sleep(2)
-            self.dataCleanup(getValidData["Nama"], self.driver)
+            assert toast == getValidData["ToastMsg"], f'Message does not match' \
+                                                      f'\nExpect: {getValidData["ToastMsg"]}' \
+                                                      f'\nActual result: {toast}'
+        except Exception as ex:
+            raise Exception(str(ex))
 
-    @pytest.fixture(params=AhliKariahPageData.getData("C:\\Users\\User\\PycharmProjects\\Pytest_Framework\\TestData\\AhliKariah\\testdata_TC02.xlsx")) #data passed always in params = []  # one tuple represent one test case
+        # data cleanup #
+        time.sleep(2)
+        self.dataCleanup(getValidData["Nama"], self.driver)
+
+    @pytest.fixture(params=AhliKariahPageData.getData("C:\\Users\\User\\PycharmProjects\\Pytest_Framework\\TestData\\AhliKariah\\testdata_TC02.xlsx"))
+    #data passed always in params = []  # one tuple represent one test case
     def getValidData(self, request):
         return request.param

@@ -43,11 +43,13 @@ class TestAhliKariah(BaseClass):
 
             # Verify Updated Test Data #
             updateAhliKariahPage.verifyUpdatedAhliKariahForm(getValidData)
-        except Exception:
-            raise Exception("Unable to update existing data")
-        finally:
+
+            # data cleanup #
             time.sleep(2)
             self.dataCleanup(getValidData["updNama"], self.driver)
+        except Exception:
+            raise Exception("Unable to update existing data")
+
     @pytest.fixture(params=AhliKariahPageData.getData("C:\\Users\\User\\PycharmProjects\\Pytest_Framework\\TestData\\AhliKariah\\testdata_TC05.xlsx")) #data passed always in params = []  # one tuple represent one test case
     def getValidData(self, request):
         return request.param
